@@ -1,0 +1,26 @@
+﻿@page "/"
+@namespace JsonDownloader.Pages
+@using JsonDownloaderData.Data
+@using Microsoft.Extensions.Configuration
+@using Microsoft.Extensions.DependencyInjection
+@using Microsoft.Extensions.Logging
+@inject IConfiguration Configuration
+@inject JsonService JsonService
+
+<h3>JSON Downloader</h3>
+
+<div>
+    <label for="apiUrlInput">API URL:</label>
+    <input id="apiUrlInput" type="text" @bind="@ApiUrl" />
+</div>
+
+<button class="btn btn-primary" @onclick="DownloadJson">Download JSON</button>
+
+@code {
+    private string ApiUrl;
+
+    private async Task DownloadJson()
+    {
+        await JsonService.DownloadAndSaveJson(ApiUrl);
+    }
+}
